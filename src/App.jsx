@@ -1,122 +1,135 @@
 import { useState } from 'react'
-import heroImg from './assets/hero.png'
-import reactLogo from './assets/react.svg'
-import viteLogo from './assets/vite.svg'
 import './App.css'
+import ElectricLogo from './components/ElectricLogo'
+import GlowCursor from './components/GlowCursor';
 
 
 function App() {
-  const [count, setCount] = useState(0)
+  const [menuOpen, setMenuOpen] = useState(false)
 
   return (
-    <>
-      <section id="center">
-        <div className="hero">
-          <img src={heroImg} className="base" width="170" height="179" alt="" />
-          <img src={reactLogo} className="framework" alt="React logo" />
-          <img src={viteLogo} className="vite" alt="Vite logo" />
-        </div>
-        <div>
-          <h1>Get started</h1>
-          <p>
-            Edit <code>src/App.jsx</code> and save to test <code>HMR</code>
-          </p>
-        </div>
-        <button
-          type="button"
-          className="counter"
-          onClick={() => setCount((count) => count + 1)}
-        >
-          Count is {count}
-        </button>
-      </section>
+    <GlowCursor
+      className="page-glow-cursor"
+      color="#dbcb98"
+      intensity={0.8}
+      trailWidth={1}
+      linger={0.8}
+      glow={0.2}
+      clickBurst
+      theme="dark"
+    >
+      <div className="site-shell">
+        <header className="site-header">
+          <a className="site-wordmark" href="#logo" onClick={() => setMenuOpen(false)}>
+            Gregor in der Kuppel
+          </a>
+          <p>Est. 2023</p>
+          <button
+            className={`menu-toggle${menuOpen ? ' is-open' : ''}`}
+            type="button"
+            aria-label={menuOpen ? 'Menü schließen' : 'Menü öffnen'}
+            aria-expanded={menuOpen}
+            aria-controls="site-menu"
+            onClick={() => setMenuOpen((isOpen) => !isOpen)}
+          >
+            <span />
+            <span />
+            <span />
+          </button>
+          {menuOpen && (
+            <nav className="site-menu" id="site-menu" aria-label="Hauptnavigation">
+              <a href="#logo" onClick={() => setMenuOpen(false)}>Logo</a>
+              <a href="#video" onClick={() => setMenuOpen(false)}>Video</a>
+              <a href="#biografie" onClick={() => setMenuOpen(false)}>Biografie</a>
+              <a href="#termine" onClick={() => setMenuOpen(false)}>Termine</a>
+              <a
+                href="https://www.instagram.com/sternstundenfestival/"
+                target="_blank"
+                rel="noreferrer"
+                onClick={() => setMenuOpen(false)}
+              >
+                Instagram <span aria-hidden="true">↗</span>
+              </a>
+            </nav>
+          )}
+        </header>
 
-      <div className="ticks"></div>
+        <section id="logo" className="hero" aria-label="Gregor in der Kuppel – Logo">
+          <ElectricLogo
+            src="/logo.svg"
+            color="#f97316"
+            glowColor="#eab308"
+            scale={0.65}
+            strands={1}
+            bend={0.6}
+            crackle={0.9}
+            arcs={1.15}
+            speed={1.45}
+            interactive
+            intensity={1.25}
+            glow={0.6}
+            thickness={1.6}
+            flicker={0.35}
+            fill={0}
+            cursorIntensity={0.7}
+            cursorRadius={100}
+          />
+        </section>
 
-      <section id="next-steps">
-        <div id="docs">
-          <svg className="icon" role="presentation" aria-hidden="true">
-            <use href="/icons.svg#documentation-icon"></use>
-          </svg>
-          <h2>Documentation</h2>
-          <p>Your questions, answered</p>
-          <ul>
-            <li>
-              <a href="https://vite.dev/" target="_blank">
-                <img className="logo" src={viteLogo} alt="" />
-                Explore Vite
-              </a>
-            </li>
-            <li>
-              <a href="https://react.dev/" target="_blank">
-                <img className="button-icon" src={reactLogo} alt="" />
-                Learn more
-              </a>
-            </li>
-          </ul>
-        </div>
-        <div id="social">
-          <svg className="icon" role="presentation" aria-hidden="true">
-            <use href="/icons.svg#social-icon"></use>
-          </svg>
-          <h2>Connect with us</h2>
-          <p>Join the Vite community</p>
-          <ul>
-            <li>
-              <a href="https://github.com/vitejs/vite" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#github-icon"></use>
-                </svg>
-                GitHub
-              </a>
-            </li>
-            <li>
-              <a href="https://chat.vite.dev/" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#discord-icon"></use>
-                </svg>
-                Discord
-              </a>
-            </li>
-            <li>
-              <a href="https://x.com/vite_js" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#x-icon"></use>
-                </svg>
-                X.com
-              </a>
-            </li>
-            <li>
-              <a href="https://bsky.app/profile/vite.dev" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#bluesky-icon"></use>
-                </svg>
-                Bluesky
-              </a>
-            </li>
-          </ul>
-        </div>
-      </section>
+        <section id="video" className="content-section video-section" aria-labelledby="video-title">
+          <div className="section-inner">
+            <h2 className="section-title" id="video-title">Video</h2>
+            <div className="video-frame">
+              <iframe
+                src="https://www.youtube-nocookie.com/embed/XGiNFSrd4oA?si=NTvr_Y7HMB3X5IxF"
+                title="Gregor in der Kuppel – Sternstunden Festival Aftermovie 2025"
+                loading="lazy"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                referrerPolicy="strict-origin-when-cross-origin"
+                allowFullScreen
+              />
+            </div>
+          </div>
+        </section>
 
-      <div className="ticks"></div>
-      <section id="spacer"></section>
-    </>
+        <section id="biografie" className="content-section biography-section" aria-labelledby="biography-title">
+          <div className="section-inner">
+            <h2 className="section-title" id="biography-title">Biografie</h2>
+            <div className="biography-copy">
+              <p>
+                Die Gregors sind ein Männergesangsensemble, das sich 2023 anlässlich des Sternstunden Festivals in Hamburg zusammenfand. Sechs Sänger,
+                die eigentlich aus ganz unterschiedlichen musikalischen Welten kommen – vom Chorleiter über den Jazzvokalisten bis zum Liedgestalter –,
+                verbindet die Lust daran, mit männlichen Stimmen Räume zu erobern, die ihnen traditionell verschlossen scheinen: die Höhe, die Farben,
+                das Zwielicht zwischen den Stimmlagen.
+              </p>
+              <p>
+                Ihr Repertoire reicht von der Renaissance bis zur Romantik, von Gesualdo über Schuberts Liedertafel-Kultur bis zu zeitgenössischen Sätzen
+                und eigenen Aussetzungen. Immer geht es darum, die sechsstimmigen Texturen nicht als Verdopplung zu begreifen, sondern als
+                feingesponnenes Gewebe, in dem jeder Mann seinen Platz findet – gleich ob im strahlenden Falsett, im dunklen Bassfundament oder
+                dazwischen.
+              </p>
+              <p>
+                Für „Gregor in der Kuppel“ machen sich die sechs die einzigartige Akustik des Kuppelraums zunutze: keine schallabsorbierende Bestuhlung,
+                keine Bühne zwischen Sängern und Zuhörern, sondern Stimmen, die sich unter dem Gewölbe sammeln, verteilen und gleichzeitig nah und
+                raumgreifend wirken. Das Programm folgt dem Bogen vom Abendlied über Mysterium bis zum augenzwinkernden Ausklang – geschrieben und
+                erkoren für einen Abend, an dem man sich in Klang hüllen kann.
+              </p>
+              <p className="biography-signoff">Kein Verstärker. Kein Instrument. Nur sechs Männerstimmen und eine Kuppel.</p>
+            </div>
+          </div>
+        </section>
+
+        <section id="termine" className="content-section dates-section" aria-labelledby="dates-title">
+          <div className="section-inner">
+            <h2 className="section-title" id="dates-title">Termine</h2>
+            <article className="date-card">
+              <time className="date-time" dateTime="2027-07-16">16. Juli 2027</time>
+              <h3>Sternstunden Festival</h3>
+            </article>
+          </div>
+        </section>
+      </div>
+    </GlowCursor>
   )
 }
 

@@ -1,5 +1,240 @@
 @import "tailwindcss";
 
+.site-shell {
+  position: relative;
+  min-height: 100svh;
+}
+
+.glow-cursor.page-glow-cursor {
+  height: auto;
+  min-height: 100svh;
+  overflow: visible;
+  background: #0c0e13;
+}
+
+.page-glow-cursor .glow-cursor__content {
+  height: auto;
+  min-height: 100svh;
+}
+
+.site-header {
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 16px 24px;
+  color: #f5f1e4;
+  background: rgba(12, 14, 19, 0.72);
+  text-align: left;
+}
+
+.site-wordmark {
+  color: inherit;
+  font-size: 0.9rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-decoration: none;
+  text-transform: uppercase;
+}
+
+.menu-toggle {
+  display: flex;
+  width: 44px;
+  height: 44px;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  padding: 0;
+  border: 1px solid rgba(245, 241, 228, 0.5);
+  border-radius: 50%;
+  color: inherit;
+  background: transparent;
+  cursor: pointer;
+}
+
+.menu-toggle span {
+  width: 18px;
+  height: 2px;
+  background: currentColor;
+  transition: transform 180ms ease, opacity 180ms ease;
+}
+
+.menu-toggle.is-open span:first-child {
+  transform: translateY(8px) rotate(45deg);
+}
+
+.menu-toggle.is-open span:nth-child(2) {
+  opacity: 0;
+}
+
+.menu-toggle.is-open span:last-child {
+  transform: translateY(-8px) rotate(-45deg);
+}
+
+.menu-toggle:focus-visible,
+.site-menu a:focus-visible,
+.site-wordmark:focus-visible {
+  outline: 2px solid #dbcb98;
+  outline-offset: 4px;
+}
+
+.site-menu {
+  position: absolute;
+  top: calc(100% + 8px);
+  right: 24px;
+  display: grid;
+  min-width: 190px;
+  gap: 4px;
+  padding: 8px;
+  border: 1px solid rgba(245, 241, 228, 0.16);
+  border-radius: 8px;
+  background: rgba(12, 14, 19, 0.82);
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.35);
+}
+
+.site-menu a {
+  display: flex;
+  justify-content: space-between;
+  padding: 10px 12px;
+  border-radius: 4px;
+  color: #f5f1e4;
+  text-decoration: none;
+}
+
+.site-menu a:hover {
+  background: rgba(245, 241, 228, 0.1);
+}
+
+.hero {
+  position: relative;
+  min-height: calc(100svh - 76px);
+}
+
+.content-section {
+  padding: clamp(56px, 9vw, 112px) 24px;
+  color: #f5f1e4;
+  background: rgba(12, 14, 19, 0.48);
+  scroll-margin-top: 24px;
+  text-align: left;
+}
+
+.biography-section {
+  background: rgba(20, 23, 32, 0.48);
+}
+
+.section-inner {
+  width: min(100%, 840px);
+  margin: 0 auto;
+}
+
+.section-title {
+  margin: 0 0 28px;
+  color: #f5f1e4;
+  font-size: clamp(2rem, 4vw, 3rem);
+  letter-spacing: 0.02em;
+}
+
+.video-frame {
+  position: relative;
+  overflow: hidden;
+  aspect-ratio: 16 / 9;
+  border: 1px solid rgba(245, 241, 228, 0.18);
+  border-radius: 10px;
+  background: #000;
+  box-shadow: 0 16px 48px rgba(0, 0, 0, 0.28);
+}
+
+.video-frame iframe {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  border: 0;
+}
+
+.biography-copy {
+  color: rgba(245, 241, 228, 0.86);
+  font-size: clamp(1rem, 1.6vw, 1.125rem);
+  line-height: 1.8;
+}
+
+.biography-copy p + p {
+  margin-top: 1.25em;
+}
+
+.biography-copy .biography-signoff {
+  margin-top: 1.8em;
+  color: #dbcb98;
+  font-size: 1.2em;
+  font-weight: 600;
+}
+
+.dates-section {
+  padding-bottom: clamp(72px, 12vw, 144px);
+}
+
+.date-card {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+  padding: 24px;
+  border: 1px solid rgba(245, 241, 228, 0.18);
+  border-radius: 10px;
+  background: rgba(245, 241, 228, 0.04);
+}
+
+.date-time {
+  flex: 0 0 auto;
+  color: #dbcb98;
+  font-size: 1.2rem;
+  font-weight: 700;
+}
+
+.date-card h3 {
+  margin: 0;
+  color: #f5f1e4;
+  font-size: 1.1rem;
+  font-weight: 500;
+}
+
+.electric-logo {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+
+@media (max-width: 600px) {
+  .site-header {
+    padding: 12px 16px;
+  }
+
+  .site-wordmark {
+    max-width: 60%;
+    font-size: 0.72rem;
+  }
+
+  .site-menu {
+    right: 16px;
+  }
+
+  .content-section {
+    padding-right: 18px;
+    padding-left: 18px;
+  }
+
+  .date-card {
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 8px;
+    padding: 20px;
+  }
+}
+
+
 .counter {
   font-size: 16px;
   padding: 5px 10px;

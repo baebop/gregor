@@ -1,0 +1,128 @@
+body {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+}
+
+/* .bg and .outer-wrapper work together to achieve a "background-align: fixed" effect,
+  which unfortunately is not supported on mobile devices. */
+
+.bg {
+  background-image: url(../public/back.jpg);
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+  height: 100vh;
+  width: 100vw;
+  position: fixed;
+  display: flex;
+  z-index: -1;
+}
+
+.outer-wrapper {
+  width: 80%;
+  top: 0;
+  min-height: 80vh;
+}
+
+.page-wrapper {
+  position: relative;
+  margin-top: 5rem;
+  left: 50vw;
+  transform: translateX(-50%);
+  /* width: 80%; */
+  display: flex;
+  flex-direction: column;
+  margin: 0;
+  padding-right: 20px;
+  padding-left: 20px;
+
+  align-items: center;
+  overflow: hidden;
+  max-width: 1200px;
+}
+
+.footer-section {
+  background-color: rgba(17, 11, 15, 0.5);
+  width: 100%;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  color: rgb(254, 243, 224);
+}
+
+
+
+.footer-section .impressum-etc a {
+  padding-left: 10px;
+  padding-right: 10px;
+  color: rgb(254, 243, 224);
+}
+
+.impressum-etc-row {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+  color: rgb(254, 243, 224);
+}
+
+.sponsor-logo-row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  padding: 0px 10px;
+   color: rgb(254, 243, 224);
+}
+
+.sponsor-logo-wrap-section2 {
+  display: flex;
+  justify-content: center;
+  max-width: 1920px;
+   color: rgb(254, 243, 224);
+}
+
+.sponsor-logo-wrap-section3 {
+  display: flex;
+  justify-content: center;
+  max-width: 1920px;
+   color: rgb(254, 243, 224);
+}
+
+.sponsor-logo-wrap-section {
+  display: flex;
+  justify-content: center;
+  max-width: 800px;
+   color: rgb(254, 243, 224);
+}
+
+.sponsor-logo-container {
+  flex: 1 1 45%; 
+  max-width: 180px;
+  padding: 10px;
+   color: rgb(254, 243, 224);
+}
+
+.sponsor-logo {
+  object-fit: contain;
+  width: 100% !important;
+  position: relative !important;
+  height: unset !important;
+  padding: 20px;
+   color: rgb(254, 243, 224);
+}
+
+.header-logo {
+  width: 45%;
+  height: auto;
+  padding: 0px 0px 32px 0px;
+  display: none;
+   color: rgb(254, 243, 224);
+}
+
+.gap-for-tablet-and-desktop {
+  height: 100px;
+  /* display: none; */
+}

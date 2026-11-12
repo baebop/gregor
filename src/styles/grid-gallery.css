@@ -1,0 +1,53 @@
+.title {
+  color: #15152A;
+  font-size: 90px;
+  font-family: "NunitoSans";
+  font-weight: 700;
+}
+
+.left-small-right-large-grid {
+  display: grid;
+  grid-template-columns: 1fr 2.25fr;
+  grid-gap: 5px;
+}
+
+img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+
+.left-large-right-small-grid {
+  display: grid;
+  grid-template-columns: 2.25fr 1fr;
+  grid-gap: 5px;
+}
+
+.two-small-one-large-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr 2.25fr;
+  grid-gap: 5px;
+}
+
+.three-even-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-gap: 5px;
+}
+
+.one-wide {
+  grid-column: span 1;
+}
+
+.medium-height {
+  height: 450px;
+}
+
+.two-wide {
+  grid-column: span 2;
+}
+
+.three-wide {
+  grid-column: span 3;
+}

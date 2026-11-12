@@ -1,0 +1,73 @@
+.contact-form-container {
+  display: flex;
+  flex-direction: column;
+  width: 600px;
+  font-family: "NunitoSans";
+  font-weight: 200;
+  font-size: 20px;
+   background: linear-gradient(to right, rgba(54, 3, 56, 0.3), rgba(51, 3, 58, 0.2));
+  padding: 50px;
+}
+
+.contact-form-container h1 {
+  font-size: 50px;
+  font-weight: 700;
+  margin-bottom: 20px;
+}
+
+.contact-form-container a {
+  font-weight: 200;
+  text-decoration: none;
+  color: rgb(249, 246, 242);
+}
+
+.contact-form-container a:hover {
+  font-weight: 200;
+  text-decoration: none;
+  color: rgba(220, 150, 237, 0.8);
+}
+
+.contact-form-row {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  flex-wrap: wrap;
+  width: 100%;
+}
+
+.contact-form-row .item {
+  flex: 1;
+  margin: 5px;
+  display: flex;
+  flex-direction: column;
+}
+
+.contact-form-row .item input,
+textarea {
+  border-radius: 8px;
+  border: solid rgb(241, 238, 219) 3px;
+  height: 45px;
+  background-color: transparent;
+  padding: 10px;
+  font-size: 20px;
+}
+
+.contact-form-row .item textarea {
+  height: 200px;
+}
+
+.contact-form-row button {
+  background-color: #290a39;
+  height: 45px;
+  border-radius: 8px;
+  color: white;
+  cursor: pointer;
+  font-size: 20px;
+}
+
+.contact-form-row .error-message {
+  color: red;
+  font-size: 14px;
+  margin-top: 5px;
+  font-weight: 200;
+}

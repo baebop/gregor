@@ -1,0 +1,106 @@
+* {
+  box-sizing: border-box;
+  font-family: "NunitoSans";
+  color: rgb(249, 246, 242);
+}
+
+@font-face {
+  font-family: "SofiaProLight";
+  src: url("Sofia Pro Light.otf");
+  color: rgb(249, 246, 242);
+}
+
+@font-face {
+  font-family: "NunitoSans";
+  src: url("NunitoSans.ttf");
+  color: rgb(254, 243, 224);
+}
+
+@media screen and (max-width: 768px) {
+  /* .header-logo {
+    height: 300px;
+  } */
+  .footer-logo {
+    height: 150px;
+  }
+}
+
+a {
+  text-decoration: strong;
+  text-decoration: none;
+  /*color: rgba(240, 129, 54);*/
+  color: rgba(220, 150, 237, 0.8);
+}
+
+a:hover {
+  color: rgb(122, 35, 130);
+}
+
+
+.modal-container {
+  position: fixed;
+  width: 100vw;
+  height: 100vh;
+  left: 0;
+  top: 0;
+  background-color: rgba(0, 0, 0, 0.8);
+  z-index: 104500;
+  color: rgb(249, 246, 242);
+}
+
+.modal-content {  
+  position: relative;
+  z-index: 100;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+}
+
+.modal-figure {
+  opacity: 0;
+  transition: all .2s ease-in-out;
+  transform: scale(.93);
+}
+
+.modal-figure.with-animation {
+  opacity: 1;
+  transform: scale(1);
+}
+
+.modal-figure img {
+  width: auto;
+  max-width: 100%;
+  height: auto;
+  display: block;
+  line-height: 0;
+  padding: 55px 0 55px;
+  margin: 0 auto;
+}
+
+.modal-close-button {
+  position: absolute;
+  top: 30px;
+  right: 32px;
+  width: 40px;
+  height: 40px;
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  z-index: 1000;
+}
+.modal-close-button span {
+  display: block;
+  width: 100%;
+  height: 3px;
+  background-color: #fff;
+  position: relative;
+}
+.modal-close-button span:nth-child(1) {
+  transform: rotate(45deg);
+}
+.modal-close-button span:nth-child(2) {
+  transform: rotate(-45deg);
+  margin-top: -3px;
+}

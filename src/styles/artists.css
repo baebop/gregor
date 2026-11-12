@@ -1,0 +1,145 @@
+.artists-page-wrapper {
+  width: 100%;
+  
+}
+
+.artists-page-wrapper h1 {
+  text-align: center;
+}
+
+.artists-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, 308px);
+  gap: 25px;
+  width: 100%;
+  justify-content: center;
+  /* grid-auto-rows: 1fr; */
+}
+
+.artist-card {
+
+  background-color: rgba(243, 119, 18, 0.6);
+  box-shadow: 0px 1px 4px rgba(0, 0, 0, 0.6);
+  padding: 20px;
+  width: 308px;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.artist-card.astroprogramm {
+  background-color: rgba(0, 136, 233, 0.6);
+}
+
+.artist-card img {
+  object-fit: cover;
+}
+
+.featured-artist-card {
+  display: flex;
+  flex-direction: column;
+  max-width: 800px;
+}
+
+.featured-artist-card .heading {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: linear-gradient(to right, rgb(232, 0, 233, 0.12), rgb(37, 3, 192, 0.12)); /* same as #e800e9, #2503c0 */
+  padding: 5px;
+  width: 100%;
+  /* height: 45px; */
+  margin-bottom: 20px;
+}
+.featured-artist-card .heading .back-button {
+  font-family: "NunitoSans";
+  font-size: 17px;
+  font-weight: 700;
+  align-items: center;
+  display: flex;
+  padding: 10px;
+  cursor: pointer;
+}
+
+.featured-artist-card .heading .back-button .close {
+  height: 24px;
+  width: 24px;
+}
+
+.featured-artist-card .heading h2 {
+  font-family: "NunitoSans";
+  font-size: 20px;
+  font-weight: 700;
+  text-transform: uppercase;
+}
+
+.featured-artist-card section {
+  display: flex;
+  flex-direction: row;
+}
+
+.featured-artist-card section .image-container {
+  position: relative;
+  aspect-ratio: 1/1;
+  width: 400px;
+  height: 400px;
+}
+
+.featured-artist-card section .artist-and-events-details {
+  display: flex;
+  flex-direction: column;
+}
+.featured-artist-card section .artist-and-events-details .divider {
+  height: 6px;
+  width: 30%;
+  margin: 4px 0px 6px 0px;
+  background-color: black;
+}
+
+.featured-artist-card section .artist-and-events-details h2  {
+  font-weight: 700;
+  margin: 0px;
+  font-size: 20px;
+}
+
+.featured-artist-card section .artist-and-events-details .artist-description {
+  white-space: pre-line;
+}
+
+
+.artist-card .image-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.artist-card .artist-name {
+  font-family: "NunitoSans";
+  font-size: 20px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: normal;
+  letter-spacing: normal;
+  text-transform: uppercase;
+  text-decoration: none;
+}
+
+.artist-link {
+  text-decoration: none;
+  color: inherit;
+}
+
+.artist-page {
+  display: flex;
+
+  flex-direction: column;
+  align-items: center;
+  padding: 20px;
+  min-height: 100vh;
+  background: linear-gradient(to right, rgba(255, 110, 0, 0.78), rgba(255, 110, 0, 0.6));
+
+}
+
+.artist-event-time {
+  font-weight: 700;
+}
