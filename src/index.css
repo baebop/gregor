@@ -50,8 +50,13 @@
   }
 }
 
+:root {
+  background: #000;
+}
+
 body {
   margin: 0;
+  background: #000;
 }
 
 #root {
@@ -59,7 +64,7 @@ body {
   max-width: 100%;
   margin: 0 auto;
   text-align: center;
-  border-inline: 1px solid var(--border);
+  background: #000;
   min-height: 100svh;
   display: flex;
   flex-direction: column;

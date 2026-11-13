@@ -1,12 +1,9 @@
-import { useState } from 'react'
 import './App.css'
 import ElectricLogo from './components/ElectricLogo'
 import GlowCursor from './components/GlowCursor';
 
 
 function App() {
-  const [menuOpen, setMenuOpen] = useState(false)
-
   return (
     <GlowCursor
       className="page-glow-cursor"
@@ -20,38 +17,23 @@ function App() {
     >
       <div className="site-shell">
         <header className="site-header">
-          <a className="site-wordmark" href="#logo" onClick={() => setMenuOpen(false)}>
+          <a className="site-wordmark" href="#logo">
             Gregor in der Kuppel
           </a>
           <p>Est. 2023</p>
-          <button
-            className={`menu-toggle${menuOpen ? ' is-open' : ''}`}
-            type="button"
-            aria-label={menuOpen ? 'Menü schließen' : 'Menü öffnen'}
-            aria-expanded={menuOpen}
-            aria-controls="site-menu"
-            onClick={() => setMenuOpen((isOpen) => !isOpen)}
-          >
-            <span />
-            <span />
-            <span />
-          </button>
-          {menuOpen && (
-            <nav className="site-menu" id="site-menu" aria-label="Hauptnavigation">
-              <a href="#logo" onClick={() => setMenuOpen(false)}>Logo</a>
-              <a href="#video" onClick={() => setMenuOpen(false)}>Video</a>
-              <a href="#biografie" onClick={() => setMenuOpen(false)}>Biografie</a>
-              <a href="#termine" onClick={() => setMenuOpen(false)}>Termine</a>
-              <a
-                href="https://www.instagram.com/sternstundenfestival/"
-                target="_blank"
-                rel="noreferrer"
-                onClick={() => setMenuOpen(false)}
-              >
-                Instagram <span aria-hidden="true">↗</span>
-              </a>
-            </nav>
-          )}
+          <nav className="site-menu" aria-label="Hauptnavigation">
+            <a href="#logo">Logo</a>
+            <a href="#video">Video</a>
+            <a href="#biografie">Biografie</a>
+            <a href="#termine">Termine</a>
+            <a
+              href="https://www.instagram.com/sternstundenfestival/"
+              target="_blank"
+              rel="noreferrer"
+            >
+              Instagram <span aria-hidden="true">↗</span>
+            </a>
+          </nav>
         </header>
 
         <section id="logo" className="hero" aria-label="Gregor in der Kuppel – Logo">
@@ -114,7 +96,6 @@ function App() {
                 raumgreifend wirken. Das Programm folgt dem Bogen vom Abendlied über Mysterium bis zum augenzwinkernden Ausklang – geschrieben und
                 erkoren für einen Abend, an dem man sich in Klang hüllen kann.
               </p>
-              <p className="biography-signoff">Kein Verstärker. Kein Instrument. Nur sechs Männerstimmen und eine Kuppel.</p>
             </div>
           </div>
         </section>
