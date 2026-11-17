@@ -156,7 +156,7 @@ function App() {
               <div className="section-inner">
                 <h2 className="section-title" id="dates-title">Termine</h2>
                 <article className="date-card">
-                  <time className="date-time" dateTime="2027-07-16">16. Juli 2027</time>
+                  <time className="date-time" dateTime="2027-07-16">16./17. Juli 2027</time>
                   <h3>Sternstunden Festival</h3>
                 </article>
               </div>
