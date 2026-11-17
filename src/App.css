@@ -2,6 +2,8 @@
 
 .site-shell {
   position: relative;
+  display: flex;
+  flex-direction: column;
   min-height: 100svh;
 }
 
@@ -82,7 +84,11 @@
 
 .hero {
   position: relative;
-  min-height: calc(100svh - 76px);
+  height: clamp(320px, 60svh, 620px);
+}
+
+.video-section {
+  padding-top: clamp(24px, 4vw, 48px);
 }
 
 .content-section {
@@ -170,6 +176,47 @@
   color: #f5f1e4;
   font-size: 1.1rem;
   font-weight: 500;
+}
+
+.site-footer {
+  display: flex;
+  justify-content: center;
+  gap: 24px;
+  padding: 24px;
+  border-top: 1px solid rgba(245, 241, 228, 0.14);
+  background: rgba(0, 0, 0, 0.72);
+}
+
+.site-footer a {
+  color: #f5f1e4;
+  text-decoration: none;
+}
+
+.site-footer a:hover {
+  color: #dbcb98;
+}
+
+.legal-page {
+  flex: 1;
+}
+
+.legal-page .section-title {
+  margin-bottom: 40px;
+}
+
+.legal-copy + .legal-copy {
+  margin-top: 32px;
+}
+
+.legal-copy h2 {
+  margin-bottom: 12px;
+  color: #f5f1e4;
+  font-size: 1.25rem;
+}
+
+.legal-copy p {
+  color: rgba(245, 241, 228, 0.86);
+  line-height: 1.8;
 }
 
 .electric-logo {
