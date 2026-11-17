@@ -7,16 +7,22 @@ const legalPages = {
     title: 'Impressum',
     sections: [
       {
-        title: 'Angaben zum Anbieter',
+        title: 'Angaben gemäß § 5 DDG',
         text: 'Mustername / Gregor in der Kuppel, Musterstraße 1, 20095 Hamburg. Dies ist ein Platzhalter und muss vor einer Veröffentlichung durch die vollständigen Angaben des verantwortlichen Anbieters ersetzt werden.',
       },
+    
       {
         title: 'Kontakt',
         text: 'E-Mail: beispiel@example.com. Auch diese Kontaktdaten sind Platzhalter.',
       },
+
       {
-        title: 'Inhaltlich verantwortlich',
-        text: 'Mustername, Musterstraße 1, 20095 Hamburg. Bitte hier die tatsächlich verantwortliche Person und Anschrift eintragen.',
+        title: 'Information gemäß § 36 VSBG',
+        text: 'Gemäß § 36 VSBG (Verbraucherstreitbeilegungsgesetz - Gesetz über die alternative Streitbeilegung in Verbrauchersachen) erklärt der Betreiber dieser Website: Wir sind weder bereit noch verpflichtet, an Streitbeilegungsverfahren vor einer Verbraucherschlichtungsstelle teilzunehmen. Hinweis Die Plattform der EU zur außergerichtlichen Streitbeilegung finden Sie online unter https://ec.europa.eu/consumers/odr/',
+      },
+      {
+        title: 'Wichtiger Hinweis',
+        text: 'Wir sind stets bemüht, Ihnen auf dieser Website richtige und vollständige Informationen zur Verfügung zu stellen. Wir übernehmen keine Haftung oder Garantie für die Aktualität oder Vollständigkeit der bereitgestellten Informationen und sind nicht verantwortlich für die Inhalte der Seiten im Internet, auf die wir verweisen oder die mit einem Link von unserer Website erreichbar sind. Wir distanzieren uns von allen Inhalten außerhalb unseres eigenen Angebote',
       },
     ],
   },
@@ -48,9 +54,9 @@ function App() {
       className="page-glow-cursor"
       color="#dbcb98"
       intensity={0.2}
-      trailWidth={0.2}
-      linger={0.3}
-      glow={0.2}
+      trailWidth={0.8}
+      linger={0.8}
+      glow={0.8}
       clickBurst
       theme="dark"
     >
@@ -165,8 +171,27 @@ function App() {
         )}
 
         <footer className="site-footer">
-          <a href="/impressum">Impressum</a>
-          <a href="/datenschutz">Datenschutz</a>
+          <a className="footer-logo" href="/#top" aria-label="Zur Startseite">
+            <img src="/logo.svg" alt="" />
+          </a>
+          <div className="footer-column">
+            <h2>Social</h2>
+            <a href="https://www.youtube.com/" target="_blank" rel="noreferrer">
+              Youtube
+            </a>
+            <a href="https://www.instagram.com/gregorinderkuppel/" target="_blank" rel="noreferrer">
+              Instagram
+            </a>
+          </div>
+          <div className="footer-column">
+            <h2>Kontakt</h2>
+            <a href="mailto:gregor@test.de">Schreib uns</a>
+          </div>
+          <div className="footer-column">
+            <h2>Legal</h2>
+            <a href="/datenschutz">Datenschutz</a>
+            <a href="/impressum">Impressum</a>
+          </div>
         </footer>
       </div>
     </GlowCursor>

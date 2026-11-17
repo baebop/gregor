@@ -1,19 +1,7 @@
 * {
   box-sizing: border-box;
-  font-family: "NunitoSans";
+  font-family: "Darker Grotesque";
   color: rgb(249, 246, 242);
-}
-
-@font-face {
-  font-family: "SofiaProLight";
-  src: url("Sofia Pro Light.otf");
-  color: rgb(249, 246, 242);
-}
-
-@font-face {
-  font-family: "NunitoSans";
-  src: url("NunitoSans.ttf");
-  color: rgb(254, 243, 224);
 }
 
 @media screen and (max-width: 768px) {

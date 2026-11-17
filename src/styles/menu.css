@@ -55,7 +55,7 @@
   overflow: scroll;
   background-color: rgba(24, 1, 27, 0.7);
   transition: all 0.8s ease;
-  font-family: 'NunitoSans';
+  font-family: "Darker Grotesque";
 }
 
 .mobile-menu.open {

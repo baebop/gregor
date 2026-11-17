@@ -1,80 +1,8 @@
 @font-face {
-  font-family: "Host Grotesk";
-  src: url("./styles/HostGrotesk-Light.ttf") format("truetype");
+  font-family: "Darker Grotesque";
+  src: url("./styles/DarkerGrotesque-VariableFont_wght.ttf") format("truetype");
   font-style: normal;
-  font-weight: 300;
-  font-display: swap;
-}
-
-@font-face {
-  font-family: "Host Grotesk";
-  src: url("./styles/HostGrotesk-Regular.ttf") format("truetype");
-  font-style: normal;
-  font-weight: 400;
-  font-display: swap;
-}
-
-@font-face {
-  font-family: "Host Grotesk";
-  src: url("./styles/HostGrotesk-Medium.ttf") format("truetype");
-  font-style: normal;
-  font-weight: 500;
-  font-display: swap;
-}
-
-@font-face {
-  font-family: "Host Grotesk";
-  src: url("./styles/HostGrotesk-SemiBold.ttf") format("truetype");
-  font-style: normal;
-  font-weight: 600;
-  font-display: swap;
-}
-
-@font-face {
-  font-family: "Host Grotesk";
-  src: url("./styles/HostGrotesk-Bold.ttf") format("truetype");
-  font-style: normal;
-  font-weight: 700;
-  font-display: swap;
-}
-
-@font-face {
-  font-family: "Host Grotesk";
-  src: url("./styles/HostGrotesk-ExtraBold.ttf") format("truetype");
-  font-style: normal;
-  font-weight: 800;
-  font-display: swap;
-}
-
-@font-face {
-  font-family: "Host Grotesk";
-  src: url("./styles/HostGrotesk-Italic.ttf") format("truetype");
-  font-style: italic;
-  font-weight: 400;
-  font-display: swap;
-}
-
-@font-face {
-  font-family: "Host Grotesk";
-  src: url("./styles/HostGrotesk-MediumItalic.ttf") format("truetype");
-  font-style: italic;
-  font-weight: 500;
-  font-display: swap;
-}
-
-@font-face {
-  font-family: "Host Grotesk";
-  src: url("./styles/HostGrotesk-SemiBoldItalic.ttf") format("truetype");
-  font-style: italic;
-  font-weight: 600;
-  font-display: swap;
-}
-
-@font-face {
-  font-family: "Host Grotesk";
-  src: url("./styles/HostGrotesk-BoldItalic.ttf") format("truetype");
-  font-style: italic;
-  font-weight: 700;
+  font-weight: 300 900;
   font-display: swap;
 }
 
@@ -91,11 +19,11 @@
   --shadow:
     rgba(0, 0, 0, 0.1) 0 10px 15px -3px, rgba(0, 0, 0, 0.05) 0 4px 6px -2px;
 
-  --sans: "Host Grotesk", system-ui, sans-serif;
-  --heading: "Host Grotesk", system-ui, sans-serif;
-  --mono: ui-monospace, Consolas, monospace;
+  --sans: "Darker Grotesque", system-ui, sans-serif;
+  --heading: "Darker Grotesque", system-ui, sans-serif;
+  --mono: "Darker Grotesque", system-ui, sans-serif;
 
-  font: 18px/145% var(--sans);
+  font: 19px/145% var(--sans);
   letter-spacing: 0.18px;
   color-scheme: light dark;
   color: var(--text);
@@ -106,7 +34,7 @@
   -moz-osx-font-smoothing: grayscale;
 
   @media (max-width: 1024px) {
-    font-size: 16px;
+    font-size: 17px;
   }
 }
 
@@ -136,7 +64,8 @@
 
 body {
   margin: 0;
-  background: #000;
+  min-height: 100svh;
+  background: #000 url("/bg.jpg") center / cover no-repeat fixed;
 }
 
 #root {
@@ -144,7 +73,7 @@ body {
   max-width: 100%;
   margin: 0 auto;
   text-align: center;
-  background: #000;
+  background: transparent;
   min-height: 100svh;
   display: flex;
   flex-direction: column;
@@ -207,11 +136,11 @@ code {
   --shadow:
     rgba(0, 0, 0, 0.1) 0 10px 15px -3px, rgba(0, 0, 0, 0.05) 0 4px 6px -2px;
 
-  --sans: "Host Grotesk", system-ui, sans-serif;
-  --heading: "Host Grotesk", system-ui, sans-serif;
-  --mono: ui-monospace, Consolas, monospace;
+  --sans: "Darker Grotesque", system-ui, sans-serif;
+  --heading: "Darker Grotesque", system-ui, sans-serif;
+  --mono: "Darker Grotesque", system-ui, sans-serif;
 
-  font: 18px/145% var(--sans);
+  font: 19px/145% var(--sans);
   letter-spacing: 0.18px;
   color-scheme: light dark;
   color: var(--text);
@@ -222,6 +151,6 @@ code {
   -moz-osx-font-smoothing: grayscale;
 
   @media (max-width: 1024px) {
-    font-size: 16px;
+    font-size: 17px;
   }
 }
