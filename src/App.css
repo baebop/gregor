@@ -72,10 +72,6 @@
   transition: color 180ms ease;
 }
 
-.site-menu a:hover {
-  color: #dbcb98;
-}
-
 .site-header > p {
   flex: 0 0 auto;
   margin: 0;
@@ -174,12 +170,20 @@
   font-weight: 700;
 }
 
+
+
 .date-card h3 {
   margin: 0;
   color: #f5f1e4;
   font-size: 1.1rem;
   font-weight: 500;
 }
+
+.date-card a:hover h3 {
+  color: #dbcb98;
+}
+
+
 
 .site-footer {
   display: flex;
@@ -213,7 +217,7 @@
 
 .footer-column h2 {
   margin: 0 0 8px;
-  color: #f5f1e4;
+  color: #dbcb98;
   font-size: 1rem;
   font-weight: 700;
   text-transform: uppercase;
@@ -225,7 +229,7 @@
   text-decoration: none;
 }
 
-.site-footer a:hover {
+.site-shell a:hover {
   color: #dbcb98;
 }
 
@@ -235,7 +239,9 @@
   }
 
   .footer-logo {
+    display: flex;
     flex-basis: 100%;
+    justify-content: center;
   }
 
   .footer-column {
@@ -264,6 +270,35 @@
 .legal-copy p {
   color: rgba(245, 241, 228, 0.86);
   line-height: 1.8;
+}
+
+.privacy-policy h2 {
+  scroll-margin-top: 100px;
+}
+
+.privacy-policy h3 {
+  margin: 24px 0 8px;
+  color: #f5f1e4;
+  font-size: 1.1rem;
+}
+
+.privacy-policy p + p {
+  margin-top: 0.9em;
+}
+
+.privacy-policy ul {
+  margin: 0 0 1.25em;
+  padding-left: 1.5em;
+  list-style: disc;
+}
+
+.privacy-policy li + li {
+  margin-top: 0.4em;
+}
+
+.privacy-policy a {
+  color: #f5f1e4;
+  overflow-wrap: anywhere;
 }
 
 .electric-logo {

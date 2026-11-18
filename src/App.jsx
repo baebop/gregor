@@ -1,6 +1,71 @@
+import { createElement } from 'react'
 import './App.css'
 import ElectricLogo from './components/ElectricLogo'
 import GlowCursor from './components/GlowCursor';
+import privacyPolicyMarkup from './privacy-policy.html?raw'
+
+const privacyPolicyTags = new Set(['a', 'br', 'h2', 'h3', 'li', 'p', 'strong', 'ul'])
+
+function renderPrivacyPolicyNode(node, key) {
+  if (node.nodeType === Node.TEXT_NODE) {
+    return node.textContent
+  }
+
+  if (node.nodeType !== Node.ELEMENT_NODE) {
+    return null
+  }
+
+  const element = node
+  if (element.classList.contains('dsg-license-content-blurred')) {
+    return null
+  }
+
+  const tagName = element.tagName.toLowerCase()
+  if (tagName === 'br') {
+    return createElement('br', { key })
+  }
+
+  const children = Array.from(element.childNodes).map((child, index) =>
+    renderPrivacyPolicyNode(child, index),
+  )
+
+  if (tagName === 'h1') {
+    return null
+  }
+
+  if (!privacyPolicyTags.has(tagName)) {
+    return children
+  }
+
+  const props = {}
+  if (tagName === 'h2' && /^[\w-]+$/.test(element.id)) {
+    props.id = element.id
+  }
+
+  if (tagName === 'a') {
+    const href = element.getAttribute('href')
+    if (!href || !/^(https?:\/\/|mailto:|#[\w-]+)$/i.test(href)) {
+      return children
+    }
+
+    props.href = href
+    if (/^https?:\/\//i.test(href)) {
+      props.target = '_blank'
+      props.rel = 'noreferrer'
+    }
+  }
+
+  return createElement(tagName, { ...props, key }, children)
+}
+
+function PrivacyPolicy() {
+  const document = new DOMParser().parseFromString(privacyPolicyMarkup, 'text/html')
+  const content = Array.from(document.body.childNodes).map((node, index) =>
+    renderPrivacyPolicyNode(node, index),
+  )
+
+  return <div className="legal-copy privacy-policy">{content}</div>
+}
 
 const legalPages = {
   '/impressum': {
@@ -8,12 +73,12 @@ const legalPages = {
     sections: [
       {
         title: 'Angaben gemäß § 5 DDG',
-        text: 'Mustername / Gregor in der Kuppel, Musterstraße 1, 20095 Hamburg. Dies ist ein Platzhalter und muss vor einer Veröffentlichung durch die vollständigen Angaben des verantwortlichen Anbieters ersetzt werden.',
+        text: 'Jakob Timm / Gregor in der Kuppel, Heinrich-Barth-Str 10, 20146 Hamburg.',
       },
     
       {
         title: 'Kontakt',
-        text: 'E-Mail: beispiel@example.com. Auch diese Kontaktdaten sind Platzhalter.',
+        text: 'E-Mail: webmaster@gregorinderkuppel.de',
       },
 
       {
@@ -28,20 +93,7 @@ const legalPages = {
   },
   '/datenschutz': {
     title: 'Datenschutz',
-    sections: [
-      {
-        title: 'Allgemeine Hinweise',
-        text: 'Der Schutz personenbezogener Daten ist wichtig. Dieser Beispieltext dient nur als Platzhalter und beschreibt keine tatsächlich geprüfte Datenverarbeitung.',
-      },
-      {
-        title: 'Verantwortliche Stelle',
-        text: 'Mustername, Musterstraße 1, 20095 Hamburg, beispiel@example.com. Bitte durch die vollständigen Kontaktdaten der verantwortlichen Stelle ersetzen.',
-      },
-      {
-        title: 'Verarbeitung und Rechte',
-        text: 'Beim Besuch einer Website können technische Daten verarbeitet werden. Welche Daten dies betrifft, zu welchem Zweck und welche Rechte betroffene Personen haben, muss für den tatsächlichen Betrieb dieser Website individuell ergänzt und rechtlich geprüft werden.',
-      },
-    ],
+    content: 'privacy-policy',
   },
 }
 
@@ -84,12 +136,16 @@ function App() {
           <main className="content-section legal-page">
             <div className="section-inner">
               <h1 className="section-title">{legalPage.title}</h1>
-              {legalPage.sections.map(section => (
-                <section className="legal-copy" key={section.title}>
-                  <h2>{section.title}</h2>
-                  <p>{section.text}</p>
-                </section>
-              ))}
+              {legalPage.content === 'privacy-policy' ? (
+                <PrivacyPolicy />
+              ) : (
+                legalPage.sections.map(section => (
+                  <section className="legal-copy" key={section.title}>
+                    <h2>{section.title}</h2>
+                    <p>{section.text}</p>
+                  </section>
+                ))
+              )}
             </div>
           </main>
         ) : (
@@ -97,22 +153,22 @@ function App() {
             <section className="hero" aria-label="Gregor in der Kuppel – Logo">
               <ElectricLogo
                 src="/logo.svg"
-                color="#f97316"
-                glowColor="#eab308"
-                scale={0.65}
-                strands={1}
-                bend={0.6}
-                crackle={0.9}
-                arcs={1.15}
-                speed={1.45}
-                interactive
-                intensity={1.25}
-                glow={0.6}
-                thickness={1.6}
-                flicker={0.35}
-                fill={0}
-                cursorIntensity={0.7}
-                cursorRadius={100}
+       color="#f97316"
+    glowColor="#dbcb98"
+    scale={0.6}
+    strands={1}
+    bend={0.6}
+    crackle={0}
+    arcs={0}
+    speed={1.45}
+    interactive
+    intensity={1.25}
+    glow={0.35}
+    thickness={1.6}
+    flicker={0.1}
+    fill={0}
+    cursorIntensity={0.8}
+    cursorRadius={125}
               />
             </section>
 
@@ -163,7 +219,9 @@ function App() {
                 <h2 className="section-title" id="dates-title">Termine</h2>
                 <article className="date-card">
                   <time className="date-time" dateTime="2027-07-16">16./17. Juli 2027</time>
-                  <h3>Sternstunden Festival</h3>
+                  <a href="https://sternstundenfestival.de" target="_blank" rel="noreferrer">
+                    <h3>Sternstunden Festival</h3>
+                  </a>
                 </article>
               </div>
             </section>

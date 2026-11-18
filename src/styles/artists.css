@@ -52,7 +52,7 @@
   margin-bottom: 20px;
 }
 .featured-artist-card .heading .back-button {
-  font-family: "Darker Grotesque";
+  font-family: "Special Gothic Expanded One";
   font-size: 17px;
   font-weight: 700;
   align-items: center;
@@ -67,7 +67,7 @@
 }
 
 .featured-artist-card .heading h2 {
-  font-family: "Darker Grotesque";
+  font-family: "Special Gothic Expanded One";
   font-size: 20px;
   font-weight: 700;
   text-transform: uppercase;
@@ -114,7 +114,7 @@
 }
 
 .artist-card .artist-name {
-  font-family: "Darker Grotesque";
+  font-family: "Special Gothic Expanded One";
   font-size: 20px;
   font-style: normal;
   font-weight: 700;

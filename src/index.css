@@ -1,8 +1,8 @@
 @font-face {
-  font-family: "Darker Grotesque";
-  src: url("./styles/DarkerGrotesque-VariableFont_wght.ttf") format("truetype");
+  font-family: "Special Gothic Expanded One";
+  src: url("./styles/SpecialGothicExpandedOne-Regular.ttf") format("truetype");
   font-style: normal;
-  font-weight: 300 900;
+  font-weight: 400;
   font-display: swap;
 }
 
@@ -19,9 +19,9 @@
   --shadow:
     rgba(0, 0, 0, 0.1) 0 10px 15px -3px, rgba(0, 0, 0, 0.05) 0 4px 6px -2px;
 
-  --sans: "Darker Grotesque", system-ui, sans-serif;
-  --heading: "Darker Grotesque", system-ui, sans-serif;
-  --mono: "Darker Grotesque", system-ui, sans-serif;
+  --sans: "Special Gothic Expanded One", system-ui, sans-serif;
+  --heading: "Special Gothic Expanded One", system-ui, sans-serif;
+  --mono: "Special Gothic Expanded One", system-ui, sans-serif;
 
   font: 19px/145% var(--sans);
   letter-spacing: 0.18px;
@@ -136,9 +136,9 @@ code {
   --shadow:
     rgba(0, 0, 0, 0.1) 0 10px 15px -3px, rgba(0, 0, 0, 0.05) 0 4px 6px -2px;
 
-  --sans: "Darker Grotesque", system-ui, sans-serif;
-  --heading: "Darker Grotesque", system-ui, sans-serif;
-  --mono: "Darker Grotesque", system-ui, sans-serif;
+  --sans: "Special Gothic Expanded One", system-ui, sans-serif;
+  --heading: "Special Gothic Expanded One", system-ui, sans-serif;
+  --mono: "Special Gothic Expanded One", system-ui, sans-serif;
 
   font: 19px/145% var(--sans);
   letter-spacing: 0.18px;
