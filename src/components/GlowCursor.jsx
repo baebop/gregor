@@ -553,8 +553,9 @@ const GlowCursor = ({
     let resizePending = false;
     const applyResize = () => {
       const s = settingsRef.current;
-      const width = Math.max(1, container.clientWidth);
-      const height = Math.max(1, container.clientHeight);
+      const bounds = canvas.getBoundingClientRect();
+      const width = Math.max(1, bounds.width);
+      const height = Math.max(1, bounds.height);
       const ratio = Math.min(window.devicePixelRatio || 1, Math.max(0.5, s.maxDevicePixelRatio || 2));
       const pixelWidth = Math.max(1, Math.round(width * ratio));
       const pixelHeight = Math.max(1, Math.round(height * ratio));
@@ -854,7 +855,7 @@ const GlowCursor = ({
     };
 
     const onPointerMove = event => {
-      const rect = container.getBoundingClientRect();
+      const rect = canvas.getBoundingClientRect();
       const x = event.clientX - rect.left;
       const y = event.clientY - rect.top;
       const inside = x >= 0 && y >= 0 && x <= rect.width && y <= rect.height;
@@ -884,7 +885,7 @@ const GlowCursor = ({
     const onPointerDown = event => {
       const s = settingsRef.current;
       if (!s.clickBurst || !s.enabled) return;
-      const rect = container.getBoundingClientRect();
+      const rect = canvas.getBoundingClientRect();
       const x = event.clientX - rect.left;
       const y = event.clientY - rect.top;
       if (x < 0 || y < 0 || x > rect.width || y > rect.height) return;
@@ -907,7 +908,9 @@ const GlowCursor = ({
       resize();
       wake();
     });
-    resizeObserver.observe(container);
+    resizeObserver.observe(canvas);
+    window.addEventListener('resize', resize, { passive: true });
+    window.visualViewport?.addEventListener('resize', resize, { passive: true });
     const intersection = new IntersectionObserver(entries => {
       visible = entries.some(entry => entry.isIntersecting);
       if (visible) {
@@ -928,6 +931,8 @@ const GlowCursor = ({
       cancelAnimationFrame(raf);
       resizeObserver.disconnect();
       intersection.disconnect();
+      window.removeEventListener('resize', resize);
+      window.visualViewport?.removeEventListener('resize', resize);
       window.removeEventListener('pointermove', onPointerMove);
       window.removeEventListener('pointerdown', onPointerDown);
       document.documentElement.removeEventListener('pointerleave', onPointerLeave);

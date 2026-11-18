@@ -1,10 +1,158 @@
-import { createElement } from 'react'
+import { createElement, useEffect, useState } from 'react'
 import './App.css'
 import ElectricLogo from './components/ElectricLogo'
 import GlowCursor from './components/GlowCursor';
+import Masonry from './components/Masonry'
 import privacyPolicyMarkup from './privacy-policy.html?raw'
 
 const privacyPolicyTags = new Set(['a', 'br', 'h2', 'h3', 'li', 'p', 'strong', 'ul'])
+
+const hidriveShareId = '4e7o7ti.47'
+const hidriveApiUrl = 'https://my.hidrive.com/api'
+
+async function fetchHiDriveImages(accessToken) {
+  const files = []
+  const pageSize = 500
+  const fields = [
+    'id',
+    'members.category',
+    'members.id',
+    'members.image.height',
+    'members.image.width',
+    'members.mime_type',
+    'members.mtime',
+    'members.type',
+  ].join(',')
+
+  for (let offset = 0; ; ) {
+    const params = new URLSearchParams({
+      path: '/',
+      fields,
+      members: 'all',
+      limit: `${offset},${pageSize}`,
+      sort: 'none',
+      access_token: accessToken,
+    })
+    const response = await fetch(`${hidriveApiUrl}/dir?${params}`)
+    if (!response.ok) {
+      throw new Error(`HiDrive directory request failed: ${response.status}`)
+    }
+
+    const data = await response.json()
+    if (!Array.isArray(data.members)) {
+      throw new Error('HiDrive returned an invalid directory listing')
+    }
+
+    if (data.members.length === 0) break
+    files.push(...data.members)
+    offset += data.members.length
+  }
+
+  return files
+    .filter(file =>
+      file.type === 'file'
+      && (file.category === 'image' || file.mime_type?.startsWith('image/')),
+    )
+    .map(file => {
+      const width = Number(file.image?.width) || 1000
+      const height = Number(file.image?.height) || 1000
+      const params = new URLSearchParams({
+        pid: file.id,
+        height: String(height),
+        access_token: accessToken,
+      })
+      if (file.mtime) params.set('refresh_time', String(file.mtime))
+
+      return {
+        id: file.id,
+        img: `${hidriveApiUrl}/file/thumbnail?${params}`,
+        width,
+        height,
+      }
+    })
+}
+
+function HiDriveGallery() {
+  const [items, setItems] = useState(null)
+  const [hasError, setHasError] = useState(false)
+
+  useEffect(() => {
+    let isActive = true
+    let refreshTimeout
+
+    const refreshAccessToken = async () => {
+      try {
+        const response = await fetch('https://my.hidrive.com/api/share/token', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+          body: new URLSearchParams({ id: hidriveShareId }),
+        })
+        if (!response.ok) {
+          throw new Error(`HiDrive token request failed: ${response.status}`)
+        }
+
+        const tokenData = await response.json()
+        if (
+          typeof tokenData.access_token !== 'string'
+          || !Number.isFinite(tokenData.expires_in)
+          || tokenData.expires_in <= 0
+        ) {
+          throw new Error('HiDrive returned an invalid access token')
+        }
+        if (!isActive) return
+
+        const nextItems = await fetchHiDriveImages(tokenData.access_token)
+        if (!isActive) return
+
+        setItems(nextItems)
+        setHasError(false)
+        refreshTimeout = window.setTimeout(
+          refreshAccessToken,
+          Math.max((tokenData.expires_in - 60) * 1000, 60_000),
+        )
+      } catch (error) {
+        if (!isActive) return
+        console.error('HiDrive gallery could not refresh its access token:', error)
+        setHasError(true)
+        refreshTimeout = window.setTimeout(refreshAccessToken, 60_000)
+      }
+    }
+
+    refreshAccessToken()
+    return () => {
+      isActive = false
+      window.clearTimeout(refreshTimeout)
+    }
+  }, [])
+
+  if (!items) {
+    return (
+      <p role={hasError ? 'alert' : 'status'}>
+        {hasError ? 'Die Galerie konnte nicht von HiDrive geladen werden.' : 'Galerie wird geladen …'}
+      </p>
+    )
+  }
+
+  if (items.length === 0) {
+    return <p role="status">In diesem HiDrive-Ordner wurden keine Bilder gefunden.</p>
+  }
+
+  return (
+    <>
+      {hasError && <p role="alert">Die Verbindung zu HiDrive wurde unterbrochen.</p>}
+      <Masonry
+        items={items}
+        columnWidth={240}
+        gap={12}
+        radius={12}
+        columns="auto"
+        hoverEffect="zoom"
+        captions={false}
+        lightbox
+      />
+    </>
+  )
+}
 
 function renderPrivacyPolicyNode(node, key) {
   if (node.nodeType === Node.TEXT_NODE) {
@@ -67,6 +215,41 @@ function PrivacyPolicy() {
   return <div className="legal-copy privacy-policy">{content}</div>
 }
 
+function BackToTopButton() {
+  const [isVisible, setIsVisible] = useState(false)
+
+  useEffect(() => {
+    const updateVisibility = () => setIsVisible(window.scrollY > 240)
+    updateVisibility()
+    window.addEventListener('scroll', updateVisibility, { passive: true })
+    return () => window.removeEventListener('scroll', updateVisibility)
+  }, [])
+
+  if (!isVisible) {
+    return null
+  }
+
+  const scrollToTop = () => {
+    window.scrollTo({
+      top: 0,
+      behavior: window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth',
+    })
+  }
+
+  return (
+    <button
+      className="back-to-top"
+      type="button"
+      aria-label="Zum Seitenanfang"
+      onClick={scrollToTop}
+    >
+      <svg viewBox="0 0 24 24" aria-hidden="true">
+        <path d="M12 19V5m-6 6 6-6 6 6" />
+      </svg>
+    </button>
+  )
+}
+
 const legalPages = {
   '/impressum': {
     title: 'Impressum',
@@ -98,6 +281,7 @@ const legalPages = {
 }
 
 function App() {
+  const [isMenuOpen, setIsMenuOpen] = useState(false)
   const path = window.location.pathname.replace(/\/+$/, '') || '/'
   const legalPage = legalPages[path]
 
@@ -114,18 +298,39 @@ function App() {
     >
       <div className="site-shell" id="top">
         <header className="site-header">
-          <a className="site-wordmark" href="/#top">
-            Gregor in der Kuppel
-          </a>
-          <p>Est. 2023</p>
-          <nav className="site-menu" aria-label="Hauptnavigation">
-            <a href="/#video">Video</a>
-            <a href="/#biografie">Biografie</a>
-            <a href="/#termine">Termine</a>
+          <div className="site-brand">
+            <a className="site-wordmark" href="/#top">
+              Gregor in der Kuppel
+            </a>
+            <p>Est. 2023</p>
+          </div>
+          <button
+            className={`menu-toggle${isMenuOpen ? ' is-open' : ''}`}
+            type="button"
+            aria-label={isMenuOpen ? 'Menü schließen' : 'Menü öffnen'}
+            aria-expanded={isMenuOpen}
+            aria-controls="primary-navigation"
+            onClick={() => setIsMenuOpen(open => !open)}
+          >
+            <span />
+            <span />
+            <span />
+          </button>
+          <nav
+            className={`site-menu${isMenuOpen ? ' is-open' : ''}`}
+            id="primary-navigation"
+            aria-label="Hauptnavigation"
+          >
+            <a href="/#video" onClick={() => setIsMenuOpen(false)}>Video</a>
+            <a href="/#biografie" onClick={() => setIsMenuOpen(false)}>Biografie</a>
+            <a href="/#termine" onClick={() => setIsMenuOpen(false)}>Termine</a>
+            <a href="/#repertoire" onClick={() => setIsMenuOpen(false)}>Repertoire</a>
+            <a href="/#gallerie" onClick={() => setIsMenuOpen(false)}>Gallerie</a>
             <a
               href="https://www.instagram.com/gregorinderkuppel/"
               target="_blank"
               rel="noreferrer"
+              onClick={() => setIsMenuOpen(false)}
             >
               Instagram <span aria-hidden="true">↗</span>
             </a>
@@ -146,6 +351,19 @@ function App() {
                   </section>
                 ))
               )}
+            </div>
+          </main>
+        ) : path !== '/' ? (
+          <main className="content-section not-found-page">
+            <div className="section-inner">
+              <p className="not-found-code" aria-hidden="true">404</p>
+              <h1 className="section-title">Seite nicht gefunden</h1>
+              <p className="not-found-message">
+                Diese Seite gibt es leider nicht oder sie wurde verschoben.
+              </p>
+              <a className="not-found-link" href="/">
+                Zur Startseite
+              </a>
             </div>
           </main>
         ) : (
@@ -225,6 +443,25 @@ function App() {
                 </article>
               </div>
             </section>
+
+            <section id="repertoire" className="content-section repertoire-section" aria-labelledby="repertoire-title">
+              <div className="section-inner">
+                <h2 className="section-title" id="repertoire-title">Repertoire</h2>
+                <ul className="repertoire-list">
+                  <li>Josquin - Absalon</li>
+                  <li>Pentatonix - Run to you</li>
+                  <li>Tu solus</li>
+                  <li>Billy Joel - Lullabye</li>
+                </ul>
+              </div>
+            </section>
+
+            <section id="gallerie" className="content-section gallerie-section" aria-labelledby="gallerie-title">
+              <div className="section-inner">
+                <h2 className="section-title" id="gallerie-title">Gallerie</h2>
+                <HiDriveGallery />
+              </div>
+            </section>
           </main>
         )}
 
@@ -251,6 +488,7 @@ function App() {
             <a href="/impressum">Impressum</a>
           </div>
         </footer>
+        <BackToTopButton />
       </div>
     </GlowCursor>
   )
